@@ -1,0 +1,95 @@
+.div-email {
+    display: none;
+}
+
+.space-cancel {
+    margin-right: 0.5%;
+}
+
+.btn-toright {
+    margin-left: 10px;
+}
+
+.select2-container--default .select2-selection--single {
+    border: 1px solid #ccc !important;
+    border-radius: 0px !important;
+    height: 34px !important;
+}
+.select2-selection select2-selection--single {
+    height: 34px !important;
+}
+
+.select2-container--default .select2-selection--multiple {
+    border-radius: 0px !important;
+}
+
+.size-senha {
+    width: 257px !important;
+}
+
+.horario-almoco-w {
+    width: 124px !important;
+}
+
+.horario-inicial-w {
+    width: 240px !important;
+}
+
+.horario-final-w {
+    width: 240px !important;
+}
+
+.dtnasci-size {
+    width: 200px !important;
+}
+
+.celtel-size {
+    width: 200px !important;
+}
+
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+    height: 100px !important;
+}
+
+.user-panel>.image>img {
+    height: 45px !important; ;
+}
+
+.spam-photo {
+    font-weight: bold;
+    color: #ea0100;
+}
+
+.spam-photo-ok {
+    font-weight: bold;
+    color: #159831;
+}
+
+.swal-button {
+    background-color: #007bff !important;
+}
+
+@media only screen and (max-width: 600px) {
+    .small-box h3 {
+        font-size: 28px;
+    }
+}
+
+.user-panel>.image>img {
+    margin-left: -6px;
+}
+
+.user-panel>.image>img {
+    width: 140%;
+}
+
+.sabado-domingo {
+    background-color: #d8595b;
+}
+
+.labelFds {
+    width: 100px;
+    margin-top: 15px;
+    margin-left: 1200px;
+}
+

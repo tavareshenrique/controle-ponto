@@ -1,0 +1,50 @@
+        // <editor-fold defaultstate="collapsed" desc="jeito burro">
+//    	$this->db->select_max('id')
+//                ->from('pessoa')
+//                ->order_by('id', 'DESC');
+//
+//        $query = $this->db->get()->result_array();
+//
+//        foreach ($query as $id):
+//
+//        	$fkpessoa = $id['id'];
+//
+//        endforeach;
+        // </editor-fold>
+
+
+---------------------------------------------------------
+
+                    <!--
+                    <?php if ($error): ?>
+
+                        <div class="alert alert-warning alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <h4><i class="icon fa fa-ban"></i> Atenção!</h4>
+                            <?= $error; ?>
+                        </div>
+
+                    <?php endif; ?>
+                    -->
+
+
+----------------------------------------------------------
+
+        // <editor-fold defaultstate="collapsed" desc="form-validation">
+//        $dados['error'] = null;
+//        $dados['sucesso'] = null;
+//        $dados['TITULO'] = 'Cadastro';
+//
+//        $this->form_validation->set_rules('nome-cadastro', 'Nome', 'required');
+//        $this->form_validation->set_rules('sobrenome-cadastro', 'Sobrenome', 'required');
+//        $this->form_validation->set_rules('email-cadastro', 'E-mail', 'required');
+//        $this->form_validation->set_rules('senha-cadastro', 'Senha', 'required');
+//        $this->form_validation->set_rules('confirme-senha', 'Confirme sua senha', 'required');
+//
+//        if ($this->form_validation->run() == FALSE ) {
+//            $dados['error'] = validation_errors();
+//            $this->doOpenCadastro($dados);
+//        } else {
+//            $this->load->view('login');
+//        }
+        // </editor-fold>
