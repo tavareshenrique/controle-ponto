@@ -31,7 +31,7 @@
     <nav class="navbar navbar-light bg-light static-top">
       <div class="container">
         <a class="navbar-brand" href="<?= base_url() ?>">Controle de Ponto</a>
-        <a class="btn btn-primary" href="<?= base_url('Login') ?>">Login</a>
+        <a class="btn btn-primary" href="<?= base_url('login') ?>">Login</a>
       </div>
     </nav>
 
@@ -44,7 +44,7 @@
             <h1 class="mb-5">Controle o seu horário de trabaho de uma forma simples e prática!</h1>
           </div>
           <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-            <form id="home" action="Cadastro" method="post" >
+            <form id="home" action="cadastro" method="post" >
               <div class="form-row">
                 <div class="col-12 col-md-9 mb-2 mb-md-0">
                   <input type="email" class="form-control form-control-lg" name="email-cadastro" id="email-cadastro" placeholder="Digite o seu e-mail e cadastre-se já!">
@@ -87,7 +87,7 @@
                 <i class="icon-graph m-auto text-primary"></i>
               </div>
               <h3>Gráficos</h3>
-              <p class="lead mb-0">Gráficos detalhados do seu horário de trablho!</p>
+              <p class="lead mb-0">Gráficos detalhados do seu horário de trabalho!</p>
             </div>
           </div>
         </div>
@@ -103,7 +103,7 @@
             <h2 class="mb-4">Pronto para começar? Cadastre-se agora!</h2>
           </div>
           <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-            <form id="home" action="Cadastro" method="post" >
+            <form id="home" action="cadastro" method="post" >
               <div class="form-row">
                 <div class="col-12 col-md-9 mb-2 mb-md-0">
                   <input type="email" class="form-control form-control-lg" name="email-cadastro" id="email-cadastro" placeholder="Informe o e-mail...">

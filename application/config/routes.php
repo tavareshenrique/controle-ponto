@@ -54,26 +54,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['main'] = 'Main';
 
 //Login
-$route['Login'] = 'Login';
+$route['login'] = 'Login';
 
 //Cadastro Usuario
-$route['Cadastro'] = 'CadastroUsuario';
+$route['cadastro'] = 'CadastroUsuario';
 
 //Recuperar Senha
-$route['Recuperar-Senha'] = 'RecuperarSenha';
+$route['recuperar_senha'] = 'RecuperarSenha';
 
 //Dashboard
 $route['Dashboard'] = 'Dashboard';
 $route['Sair'] = 'Dashboard/sessionDestroy';
 
 //Ponto
-$route['Ponto'] = 'Ponto';
+$route['horarios/incluir/ponto'] = 'Ponto';
 
 //Ponto
-$route['PontoMes'] = 'Ponto/Mes';
+$route['horarios/incluir/pontos'] = 'Ponto/Mes';
 
 //Consultar Pontos
-$route['ConsultarPontos'] = 'ConsultarPontos';
+$route['horarios/consultar/pontos'] = 'ConsultarPontos';
 
 //Consultar Pontos Filtro
 $route['ConsultarPontosFiltro'] = 'ConsultarPontos/Filtro';

@@ -31,8 +31,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         private function doSetData() {
             $data['titulo'] = 'Cadastro';
-            if (isset($_POST['email-cadastro'])) { $data['email'] = $_POST['email-cadastro']; }
-            else { $data['email'] = ''; }
+            if (isset($_POST['email-cadastro'])) {
+                    $data['email'] = $_POST['email-cadastro'];
+            } else {
+                $data['email'] = '';
+            }
+
             return $data;
         }
 
@@ -41,5 +45,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             $this->load->view('app/include/cabecalho_login');
             $this->load->view('app/login/cadastro', $data);
             $this->load->view('app/include/footer_login');
+            $this->load->view('app/include/adminLTE');
         }
 }

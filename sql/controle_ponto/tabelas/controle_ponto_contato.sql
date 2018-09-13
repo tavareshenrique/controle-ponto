@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.23, for Linux (x86_64)
 --
--- Host: localhost    Database: controle_ponto
+-- Host: 127.0.0.1    Database: controle_ponto
 -- ------------------------------------------------------
 -- Server version	5.7.23-0ubuntu0.16.04.1
 
@@ -41,7 +41,7 @@ CREATE TABLE `contato` (
 
 LOCK TABLES `contato` WRITE;
 /*!40000 ALTER TABLE `contato` DISABLE KEYS */;
-INSERT INTO `contato` VALUES (1,'','','','',1),(3,'24','24','98817-4627','9887-6322',3),(4,'24','00','98817-4627','',12);
+INSERT INTO `contato` VALUES (1,'24','24','988174627','22552323',1),(3,'24','24','98817-4627','9887-6322',3),(4,'24','00','98817-4627','',12);
 /*!40000 ALTER TABLE `contato` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-02 23:43:16
+-- Dump completed on 2018-09-11 23:38:14

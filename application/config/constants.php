@@ -89,6 +89,7 @@ define('SENHA_BEGIN', '3@CuCcI14tTini15#');
 define('SENHA_END', '92%lIO35ME9S*S10');
 define('VERSION', '18.5.6');
 //Alterar
-define('MonthNumber','8');
-define('Month','Agosto');
+define('MonthNumber','9');
+define('Month','Setembro');
 define('Year','2018');
+

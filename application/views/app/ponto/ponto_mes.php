@@ -34,11 +34,12 @@
                                 <?php foreach ($ponto as $item):?>
                                     <tr class="dias">
                                         <td>
-                                            <label class="col-sm-6 control-label data-dia" id="reservation-<?php echo substr(date('d/m/Y', strtotime($item['dia'])), 0, 2); ?>" name="data-trabalho" ><?php echo date('d/m/Y', strtotime($item['dia'])); ?></label>
+<!--                                            <label class="col-sm-6 control-label data-dia" id="reservation---><?php //echo substr(date('d/m/Y', strtotime($item['dia'])), 0, 2); ?><!--" name="dataTrabalho" value="--><?php //echo $item['dia'] ?><!--" >--><?php //echo date('d/m/Y', strtotime($item['dia'])); ?><!--</label>-->
+                                            <input class="col-sm-6 control-label data-dia" id="reservation-<?php echo substr(date('d/m/Y', strtotime($item['dia'])), 0, 2); ?>" type="hidden" name="dataTrabalho" value="<?php echo $item['dia'] ?>" ><?php echo date('d/m/Y', strtotime($item['dia'])); ?>
                                         </td>
                                         <td>
                                             <div class="col-sm-6 input-group bootstrap-timepicker">
-                                                <input type="time" value="<?php echo $horario_inicial ?>" class="form-control" id="hora-inicial" name="horaInicial[]">
+                                                <input type="time" value="<?php echo $horario_inicial ?>" class="form-control" id="hora-inicial-<?php echo $horario_inicial ?>" name="horaInicial[]">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-clock-o"></i>
                                                 </div>
@@ -46,7 +47,7 @@
                                         </td>
                                         <td>
                                             <div class="col-sm-6 input-group bootstrap-timepicker">
-                                                <input type="time" value="<?php echo $horario_final ?>" class="form-control" id="hora-final" name="horaFinal[]">
+                                                <input type="time" value="<?php echo $horario_final ?>" class="form-control" id="hora-final-<?php echo $horario_final ?>" name="horaFinal[]">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-clock-o"></i>
                                                 </div>
@@ -60,6 +61,11 @@
                 </div>
 
                 <div class="box-footer">
+
+                    <button type="button" class="btn btn-sab-dom" data-toggle="modal" data-target="#modal-danger">
+                    Sabado / Domingo
+                    </button>
+
                     <input id="cadPonto" type="submit" value="Incluir Horários" class="btn btn-success pull-right">
                     <button type="submit" class="btn btn-danger pull-right space-cancel">Cancelar</button>
                 </div>

@@ -36,10 +36,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     'data_cadastro' => $dataPessoa[0]['data_cadastro']
                 );
 
-                $this->load->view('app/include/header', $data);
-                $this->load->view('app/include/cabecalho_default', $data);
-                $this->load->view('app/ponto/ponto', $data);
-                $this->load->view('app/include/footer_default');
+                if (!$this->definyDefaultTime($data, $this->session->userdata('id'))) {
+                    $this->load->view('app/include/header', $data);
+                    $this->load->view('app/include/cabecalho_default', $data);
+                    $this->load->view('app/ponto/ponto', $data);
+                    $this->load->view('app/include/footer_default');
+                    $this->load->view('app/include/adminLTE');
+                }
             } else {
                 redirect('Login');
             }
@@ -64,7 +67,47 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     'foto' => $fotoPerfil,
                     'profissao' => $dataPessoa[0]['profissao'],
                     'data_cadastro' => $dataPessoa[0]['data_cadastro'],
-                    'ponto' => $this->getDay(MonthNumber, Year),
+//                    'ponto' => $this->getDay(MonthNumber, Year),
+                    'horario_inicial' => $this->getTimeDefault(true, $this->session->userdata('id')),
+                    'horario_final' => $this->getTimeDefault(false, $this->session->userdata('id'))
+                );
+
+                if (!$this->definyDefaultTime($data, $this->session->userdata('id'))) {
+                    $this->load->view('app/include/header', $data);
+                    $this->load->view('app/include/cabecalho_default', $data);
+                    $this->load->view('app/ponto/consultarFilter_mes', $data); // $this->load->view('app/ponto/ponto_mes', $data);
+                    $this->load->view('app/include/footer_default');
+                    $this->load->view('app/include/adminLTE');
+                }
+            } else {
+                redirect('Login');
+            }
+        }
+
+        public function doIncMes() {
+
+
+            if (isLogado($this->session->userdata('id')) == TRUE) {
+                $dataPessoa = $this->setHeader();
+
+                if (empty($dataPessoa[0]['foto'])) {
+                    $fotoPerfil = $this->setPhoto();
+                } else {
+                    $fotoPerfil = $dataPessoa[0]['foto'];
+                }
+
+                $mes = $this->returnNumberMonth($_POST['mes']);
+                $ano = ($_POST['ano']);
+
+                $data = array(
+                    'titulo' => 'Ponto',
+                    'nome' => $dataPessoa[0]['nome'],
+                    'sobrenome' => $dataPessoa[0]['sobrenome'],
+                    'foto' => $fotoPerfil,
+                    'profissao' => $dataPessoa[0]['profissao'],
+                    'data_cadastro' => $dataPessoa[0]['data_cadastro'],
+                    'ponto' => $this->getDay($mes, $ano),
+//                    'ponto' => $this->getDay(MonthNumber, Year),
                     'horario_inicial' => $this->getTimeDefault(true, $this->session->userdata('id')),
                     'horario_final' => $this->getTimeDefault(false, $this->session->userdata('id'))
                 );
@@ -73,6 +116,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 $this->load->view('app/include/cabecalho_default', $data);
                 $this->load->view('app/ponto/ponto_mes', $data);
                 $this->load->view('app/include/footer_default');
+                $this->load->view('app/include/adminLTE');
             } else {
                 redirect('Login');
             }
@@ -84,31 +128,85 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }
 
         public function doInsertMeses() {
-            $dias = $_POST;
-            $horaInicial = $dias['horaInicial'];
-            $horaFinal = $dias['horaFinal'];
+            $horas = $_POST;
+            $mes = substr($horas['dataTrabalho'], 5,-3);
+            $ano = substr($horas['dataTrabalho'], 0,-6);
+            $horaInicial = $horas['horaInicial'];
+            $horaFinal = $horas['horaFinal'];
             $NumDias = count($horaInicial);
-            $this->ponto_model->doInsertMeses($this->session->userdata('id'), Year, MonthNumber, $NumDias, $horaInicial, $horaFinal);
-            redirect('PontoMes');
+            $this->ponto_model->doInsertMeses($this->session->userdata('id'), $ano, $mes, $NumDias, $horaInicial, $horaFinal);
+            redirect('Ponto/mes');
+        }
+
+        private function definyDefaultTime($data, $pessoa) {
+
+            if ($this->ponto_model->doStandardTimetable($pessoa)) {
+                $this->load->view('app/include/header', $data);
+                $this->load->view('app/include/cabecalho_default', $data);
+                $this->load->view('app/ponto/cadastrar_horario', $data);
+                $this->load->view('app/include/footer_default');
+                $this->load->view('app/include/adminLTE');
+
+                return true;
+            } else {
+                return false;
+            }
         }
 
         private function getTimeDefault($timeStart, $pessoa) {
-            $data = $this->ponto_model->getTimeDefault($timeStart, $pessoa);
-            return $data;
+            return $this->ponto_model->getTimeDefault($timeStart, $pessoa);
         }
 
         private function getDay($mes, $ano) {
-            $data = $this->ponto_model->getDay($mes, $ano);
-            return $data;
+            return $this->ponto_model->getDay($mes, $ano);
         }
 
         private function setHeader() {
-            $data = $this->HeaderDefault_model->selectPessoa($this->session->userdata('id'));
-            return $data;
+            return $this->HeaderDefault_model->selectPessoa($this->session->userdata('id'));
         }
 
         private function setPhoto() {
-            $data = $this->HeaderDefault_model->getPhoto();
-            return $data;
+            return $this->HeaderDefault_model->getPhoto();
+        }
+
+        private function returnNumberMonth($month) {
+            switch ($month) {
+                case "Janeiro":
+                    return 1;
+                    break;
+                case "Fevereiro":
+                    return 2;
+                    break;
+                case "Março":
+                    return 3;
+                    break;
+                case "Abril":
+                    return 4;
+                    break;
+                case "Maio":
+                    return 5;
+                    break;
+                case "Junho":
+                    return 6;
+                    break;
+                case "Julho":
+                    return 7;
+                    break;
+                case "Agosto":
+                    return 8;
+                    break;
+                case "Setembro":
+                    return 9;
+                    break;
+                case "Outubro":
+                    return 10;
+                    break;
+                case "Novembro":
+                    return 11;
+                    break;
+                case "Dezembro":
+                    return 12;
+                    break;
+            }
         }
     }

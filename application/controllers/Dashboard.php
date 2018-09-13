@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Created by PhpStorm.
- * User: henriqueappMask
+ * User: henrique
  * Date: 5/8/18
  * Time: 10:58 PM
  */
@@ -45,6 +45,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 $this->load->view('app/include/cabecalho_default', $data);
                 $this->load->view('app/dashboard/dashboard', $data);
                 $this->load->view('app/include/footer_default');
+                $this->load->view('app/include/adminLTE');
             } else {
                 redirect('Login');
             }
@@ -61,7 +62,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             if (($newYear == null) or ($newYear == "0")) {
                 return '00:00:00';
             } else {
-                $getYear = $this->appMask($newYear);
+                $getYear = valueMask($newYear);
                 return $getYear;
             }
         }
@@ -71,7 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             if (($didCurrent == null) or ($didCurrent == "0")) {
                 return '00:00:00';
             } else {
-                $didCurrent = $this->appMask($didCurrent);
+                $didCurrent = valueMask($didCurrent);
                 return $didCurrent;
             }
 
@@ -82,42 +83,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             if (($time == null) or ($time == "0")) {
                 return '00:00:00';
             } else {
-                $getTime = $this->appMask($time);
+                $getTime = valueMask($time);
                 return $getTime;
             }
         }
 
         private function setHoursPay() {
-            $time = $this->dashboard_model->getHoursPay($this->session->userdata('id'));
+            $time = $this->dashboard_model->getHoursPay($this->session->userdata('id'), MonthNumber);
             if (($time == null) or ($time == "0")) {
                 return '00:00:00';
             } else {
-                $getTime = $this->appMask($time);
+                $getTime = valueMask($time);
                 return $getTime;
             }
         }
 
         private function setHeader() {
-            $data = $this->HeaderDefault_model->selectPessoa($this->session->userdata('id'));
-            return $data;
+            return $this->HeaderDefault_model->selectPessoa($this->session->userdata('id'));;
         }
 
         private function setPhoto() {
-            $data = $this->HeaderDefault_model->getPhoto();
-            return $data;
-        }
-
-        private function appMask($value) {
-            if ($value != "0") {
-                if (strlen($value) == 6 ) {
-                    $getMask = mask("##:##:##", $value);
-                } elseif (strlen($value) == 7 ) {
-                    $getMask = mask("###:##:##", $value);
-                }
-            } else {
-                $getMask = '00:00:00';
-            }
-
-            return $getMask;
+            return $this->HeaderDefault_model->getPhoto();;
         }
 }

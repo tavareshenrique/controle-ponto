@@ -20,14 +20,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         public function index() {
 
             if (isLogado($this->session->userdata('id')) == TRUE ) {
-                $dataPessoa = $this->setHeader();
 
-                if (empty($dataPessoa[0]['foto'])) {
-                    $fotoPerfil = $this->setPhoto();
-                } else {
-                    $fotoPerfil = $dataPessoa[0]['foto'];
-                }
-
+                $dataPessoa   = $this->setHeader();
+                $photoProfile = $this->getPhotoProfile($dataPessoa[0]['foto']);
 
                 $data = array(
                     'titulo' => 'Perfil',
@@ -37,7 +32,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     'nome' => $dataPessoa[0]['nome'],
                     'sobrenome' => $dataPessoa[0]['sobrenome'],
                     'data_nascimento' => $dataPessoa[0]['data_nascimento'],
-                    'foto' => $fotoPerfil,
+                    'foto' => $photoProfile,
                     'usuario' => $dataPessoa[0]['usuario'],
                     'email' => $dataPessoa[0]['email'],
                     'data_cadastro' => $dataPessoa[0]['data_cadastro'],
@@ -59,21 +54,53 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     'todas_cidades' => $this->setCities(),
                     'cidade' => $dataPessoa[0]['cidade']
                 );
+
+                $this->load->view('app/include/header', $data);
+                $this->load->view('app/include/cabecalho_default', $data);
+                $this->load->view('app/profile/perfil', $data);
+                $this->load->view('app/include/footer_perfil');
+                $this->load->view('app/include/adminLTE');
             } else {
                 redirect('Login');
             }
-
-            $this->load->view('app/include/header', $data);
-            $this->load->view('app/include/cabecalho_default', $data);
-            $this->load->view('app/profile/perfil', $data);
-            $this->load->view('app/include/footer_perfil');
         }
 
         public function doInsert() {
-
-            $fotoPerfil = $this->photoToBase64($_FILES['fotoPerfil']);
-            $this->Perfil_model->doInsertUpdt($this->session->userdata('id'), $fotoPerfil);
+            $this->Perfil_model->doInsertUpdt($this->session->userdata('id'), $this->photoToBase64($_FILES['fotoPerfil']));
             redirect('Perfil');
+        }
+
+        private function setHeader() {
+            return $this->HeaderDefault_model->selectPessoa($this->session->userdata('id'));
+        }
+
+        private function setYearTotal($year) {
+            $yearTotal = $this->dashboard_model->getYearTotal($this->session->userdata('id'), $year);
+            if ($yearTotal == null) {
+                return '00:00:00';
+            } else {
+                $getYear = valueMask($yearTotal);
+                return $getYear;
+            }
+        }
+
+        private function setHourTotal() {
+            $hourTotal = $this->dashboard_model->getHourTotal($this->session->userdata('id'));
+            if ($hourTotal == null) {
+                return '00:00:00';
+            } else {
+                $getYear = valueMask($hourTotal);
+                return $getYear;
+            }
+        }
+
+        private function setPhoto() {
+            $data = $this->HeaderDefault_model->getPhoto();
+            return $data;
+        }
+
+        private function setCities() {
+            return $this->Cidade_model->getCities();;
         }
 
         public function doChangePassword() {
@@ -84,48 +111,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             } else {
                 echo "";
             }
-        }
-
-        public function doValidateUser(){
-            $getUser = "{$_POST['nomeUsuario']}";
-
-            if ($this->Perfil_model->doValidateUserForPerson($getUser, $this->session->userdata('id')) == 'Já existe!') {
-                echo 'Não existe ainda!';
-                exit;
-            }
-            $user = $this->Perfil_model->doValidateUser($getUser);
-            echo $user;
-        }
-
-        private function setHeader() {
-            $data = $this->HeaderDefault_model->selectPessoa($this->session->userdata('id'));
-
-            return $data;
-        }
-
-        private function setYearTotal($year) {
-            $yearTotal = $this->dashboard_model->getYearTotal($this->session->userdata('id'), $year);
-            if ($yearTotal == null) {
-                return '00:00:00';
-            } else {
-                $getYear = $this->appMask($yearTotal);
-                return $getYear;
-            }
-        }
-
-        private function setHourTotal() {
-            $hourTotal = $this->dashboard_model->getHourTotal($this->session->userdata('id'));
-            if ($hourTotal == null) {
-                return '00:00:00';
-            } else {
-                $getYear = $this->appMask($hourTotal);
-                return $getYear;
-            }
-        }
-
-        private function setCities() {
-            $data = $this->Cidade_model->getCities();
-            return $data;
         }
 
         private function photoToBase64($photo) {
@@ -140,30 +125,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             }
         }
 
+        private function getPhotoProfile($photo) {
+            if (empty($photo)) {
+                $photoProf = $this->setPhoto();
+            } else {
+                $photoProf = $photo;
+            }
+
+            return $photoProf;
+        }
+
+        public function doValidateUser(){
+            $getUser = "{$_POST['nomeUsuario']}";
+
+            if ($this->Perfil_model->doValidateUserForPerson($getUser, $this->session->userdata('id')) == 'Já existe!') {
+                echo 'Não existe ainda!';
+                exit;
+            }
+            $user = $this->Perfil_model->doValidateUser($getUser);
+            echo $user;
+        }
+
         private function convertToNormal($tiny) {
             $data = tinyintToNormal($tiny);
             return $data;
         }
-
-        private function appMask($value) {
-            if (strlen($value) == 6 ) {
-                $getMask = mask("##:##:##", $value);
-            } elseif (strlen($value) == 7 ) {
-                $getMask = mask("###:##:##", $value);
-            } elseif (strlen($value) == 8 ) {
-                $getMask = mask("####:##:##", $value);
-            } elseif (strlen($value) == 9 ) {
-                $getMask = mask("#####:##:##", $value);
-            } elseif (strlen($value) == 10 ) {
-                $getMask = mask("######:##:##", $value);
-            }
-
-            return $getMask;
-        }
-
-        private function setPhoto() {
-            $data = $this->HeaderDefault_model->getPhoto();
-            return $data;
-        }
-
     }

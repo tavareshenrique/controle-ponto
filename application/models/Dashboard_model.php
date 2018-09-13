@@ -59,7 +59,7 @@
             if( ($data[0]['horario_inicial'] != null) and ($data[0]['horario_final']) and ($data[0]['horario_almoco'])) {
 
                 $sql  = '(functionTotCurrentMonth('. "'" . $data[0]['horario_inicial'] . "'" . ', '. "'" . $data[0]['horario_final'] . "'" .', '. "'" . $data[0]['horario_almoco'] . "'" .', '. $data[0]['sabado']  .', '. $data[0]['domingo'] .')) AS timeAllMonth';
-//                mDebug($sql);
+                //mDebug($sql);
                 $this->db->select($sql);
                 $query = $this->db->get()->row()->timeAllMonth;
 //                mDebug($query);
@@ -74,14 +74,15 @@
         /**
          * Retorna as Horas a Pagar no atual mês.
          */
-        public function getHoursPay($usuario) {
+        public function getHoursPay($usuario, $month) {
 
             $data = $this->getHorarioPadrao($usuario);
             if( ($data[0]['horario_inicial'] != null) and ($data[0]['horario_final']) and ($data[0]['horario_almoco'])) {
 
-                $sql = '(functionHoursToPay('. "'" . $data[0]['horario_inicial'] . "'" . ', '. "'" . $data[0]['horario_final'] . "'" .', '. "'" . $data[0]['horario_almoco'] . "'" .', '. $data[0]['sabado']  .', '. $data[0]['domingo'] .", ". $usuario .')) AS hoursPay';
+                $sql = '(functionHoursToPay('. "'" . $data[0]['horario_inicial'] . "'" . ', '. "'" . $data[0]['horario_final'] . "'" .', '. "'" . $data[0]['horario_almoco'] . "'" .', '. $data[0]['sabado']  .', '. $data[0]['domingo'] .", ". $usuario . ", ". $month . ')) AS hoursPay';
                 $this->db->select($sql);
                 $query = $this->db->get()->row()->hoursPay;
+
 
                 return $query;
 

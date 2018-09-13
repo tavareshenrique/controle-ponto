@@ -139,8 +139,11 @@
 
                 $query = $this->db->get();
                 $time = $query->row();
-
-                return $time->horario_inicial;
+                if ($time == null) {
+                    return "00:00:00";
+                } else {
+                    return $time->horario_inicial;
+                }
 
             } else {
                 $this->db->select('horario_final')
@@ -149,10 +152,28 @@
 
                 $query = $this->db->get();
                 $time = $query->row();
-
-                return $time->horario_final;
+                if ($time == null) {
+                    return "00:00:00";
+                } else {
+                    return $time->horario_final;
+                }
             }
 
+        }
+
+        public function doStandardTimetable($pessoa) {
+
+            $this->db->select('*')
+                ->from('horario_padrao')
+                ->where('fkpessoa', $pessoa);
+
+            $query = $this->db->get()->result_array();
+
+            if ($query != null) {
+                return false;
+            } else {
+                return true;
+            }
         }
 
         private function getData($isStartDate, $dataTrab) {

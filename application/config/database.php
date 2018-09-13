@@ -74,11 +74,11 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	   => 'mysql:host=us-cdbr-iron-east-01.cleardb.net;dbname=heroku_eebc32466cd6269;charset=utf8;',
-	'hostname' => 'us-cdbr-iron-east-01.cleardb.net',
-	'username' => 'b550a23c0e1327',
-	'password' => 'd9bd724c',
-	'database' => 'heroku_eebc32466cd6269',
+	'dsn'	   => 'mysql:host=127.0.0.1;dbname=controle_ponto;charset=utf8;',
+	'hostname' => '127.0.0.1',
+	'username' => 'root',
+	'password' => '31415',
+	'database' => 'controle_ponto',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

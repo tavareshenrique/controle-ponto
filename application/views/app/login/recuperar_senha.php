@@ -16,8 +16,8 @@
                 </form>
 
                 <div class="text-center">
-                    <a class="d-block small mt-3" href="<?= base_url('Cadastro') ?>">Cadastrar</a>
-                    <a class="d-block small" href="<?= base_url('Login') ?>">Login</a>
+                    <a class="d-block small mt-3" href="<?= base_url('cadastro') ?>">Cadastrar</a>
+                    <a class="d-block small" href="<?= base_url('login') ?>">Login</a>
                 </div>
             </div>
         </div>

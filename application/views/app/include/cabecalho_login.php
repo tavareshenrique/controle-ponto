@@ -7,14 +7,14 @@
   	<link href="<?=base_url('assets/login/css/sb-admin.css')?>" rel="stylesheet">
 
     <!-- Ionicons -->
-    <link rel="stylesheet" href="<?=base_url('assets/AdminLTE-2.4.3/bower_components/Ionicons/css/ionicons.min.css')?>">
+    <link rel="stylesheet" href="<?=base_url('assets/adminLTE/bower_components/Ionicons/css/ionicons.min.css')?>">
     <!-- Theme style -->
-    <link rel="stylesheet" href="<?=base_url('assets/AdminLTE-2.4.3/dist/css/login_page/AdminLTE.min.css')?>">
+    <link rel="stylesheet" href="<?=base_url('assets/adminLTE/dist/css/login_page/AdminLTE.min.css')?>">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
      folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="<?=base_url('assets/AdminLTE-2.4.3/dist/css/skins/_all-skins.min.css')?>">
+    <link rel="stylesheet" href="<?=base_url('assets/adminLTE/dist/css/skins/_all-skins.min.css')?>">
 
-    <link rel="stylesheet" href="<?=base_url('assets/myAssets/css/style.css')?>">
+    <link rel="stylesheet" href="<?=base_url('assets/assets/css/style.css')?>">
 
 <body class="bg-dark">
 

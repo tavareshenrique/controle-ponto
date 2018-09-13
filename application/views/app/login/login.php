@@ -43,8 +43,8 @@
 
           </form>
           <div class="text-center">
-            <a class="d-block small mt-3" href="<?= base_url('Cadastro') ?>">Cadastrar</a>
-            <a class="d-block small" href="<?= base_url('Recuperar-Senha') ?>">Esqueceu a Senha?</a>
+            <a class="d-block small mt-3" href="<?= base_url('cadastro') ?>">Cadastrar</a>
+            <a class="d-block small" href="<?= base_url('recuperar_senha') ?>">Esqueceu a Senha?</a>
           </div>
         </div>
     </div>
